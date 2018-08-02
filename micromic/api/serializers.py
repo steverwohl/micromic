@@ -10,7 +10,7 @@ class DailyLogListSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class to map the serializers fields with the model fields"""
         model = DailyLogList
-        fields = ('id', 'name', 'owner', 'date_created', 'date_modified')
+        fields = ('id', 'name', 'owner', 'date_created', 'date_modified', 'upload')
         read_only_fields = ('date_created', 'date_modified')
 
 
