@@ -3,6 +3,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
+from .validators import validate_file_size
 
 class DailyLogList(models.Model):
     """This class represents the DailyLogList model"""
@@ -14,6 +15,7 @@ class DailyLogList(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)
+    upload = models.FileField(upload_to='uploads/%Y/%m/%d/', validators=[validate_file_size])
 
     def __str__(self):
         """Give me something I can read"""
