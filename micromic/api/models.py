@@ -11,7 +11,7 @@ class DailyLogList(models.Model):
     owner = models.ForeignKey(
         'auth.User',
         related_name="dailyloglists",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     date_created = models.DateTimeField(auto_now_add = True)
     date_modified = models.DateTimeField(auto_now = True)
@@ -20,6 +20,21 @@ class DailyLogList(models.Model):
     def __str__(self):
         """Give me something I can read"""
         return "{}".format(self.name)
+
+
+class MaintenanceList(models.Model):
+    """This class represents the DailyLogList model"""
+    owner = models.ForeignKey(
+        'auth.User',
+        related_name="maintenancelist",
+        on_delete=models.CASCADE,
+    )
+    date_created = models.DateTimeField(auto_now_add = True, blank= False, unique=True)
+    comment = models.CharField(max_length = 300, blank = False, unique = False)
+
+    def __str__(self):
+        """Give me something I can read"""
+        return "{}".format(self.comment)
 
 
 @receiver(post_save, sender=User)
