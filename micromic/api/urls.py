@@ -4,6 +4,8 @@ from .views import CreateView, DetailsView, UserView, UserDetailsView, Maintenan
 from rest_framework.authtoken.views import obtain_auth_token
 
 
+app_name = 'api'
+
 urlpatterns = {
     path('auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('dailyloglists/', CreateView.as_view(), name="create"),

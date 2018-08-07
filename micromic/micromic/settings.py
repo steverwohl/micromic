@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api.apps.ApiConfig',
-    'rest_framework.authtoken',
     'frontend.apps.FrontendConfig',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -55,13 +55,14 @@ MIDDLEWARE = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_URL = '/media/'
 
 ROOT_URLCONF = 'micromic.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
