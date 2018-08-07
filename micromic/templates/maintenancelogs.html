@@ -1,7 +1,7 @@
-<!---DOCTYPE html --->
-<html>
+{% extends "base.html" %}
 
-<body>
+{% block content %}
+
 <h1> {{ title }} </h1>
 {% load static %}
 {% for obj in object_list %}
@@ -10,5 +10,4 @@
 {{ obj.comment}}<br/>
 {% endfor %}
 
-</body>
-</html
+{% endblock content %}
