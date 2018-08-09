@@ -1,14 +1,9 @@
 {% extends "base.html" %}
 
+{% load static %}
 
 {% block head_title %} {{ title }} | {{ block.super }}  {% endblock head_title %}
 
 {% block content %}
-
-<h1> {{ title }} </h1>
-{% load static %}
-
-{{ instance.date_created}}<br/>
-<img class="img" src="{% get_media_prefix %}{{ instance.upload }}" alt="{{ instance.name }}" /><br/>
-
+<div class = 'rMarkdown'>{% get_media_prefix %}{{ instance.upload }}</div>
 {% endblock content %}

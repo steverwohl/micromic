@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <h1> {{ title }} </h1>
 
 {% for obj in object_list %}
 
- <li><a href="{% url 'frontend:dailylog_detail' obj.id %}">{{ obj.name }}</a></li>
-{{ obj.date_created}}<br/>
-<img class="img" src="{% get_media_prefix %}{{ obj.upload }}" alt="{{ obj.name }}" /><br/>
+<li><a href="{% url 'frontend:dailylog_detail' obj.id %}">{{obj.date_created}}<br/>
+<div id='here' class='rMarkdown-QuickView'>{% get_media_prefix %}{{ obj.upload }}</div>
 {% endfor %}
 
 {% endblock content %}
