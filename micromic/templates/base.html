@@ -1,44 +1,64 @@
 <!---DOCTYPE html --->
 
 {% load static %}
+<!---DOCTYPE html--->
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> {% block head_title %} MicroMit Journal {% endblock head_title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <style>
+      {% block style}
+      {% end block style}
+    </style>
+  </head>
+  <body>
+    {% block top-nav-wrapper %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">MicroMic</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li {% if slug == 'index' %}class="active"{% endif %}><a href="/">Home</a></li>
+            <li {% if slug == 'dailylogs' %}class="active"{% endif %}><a href="{% url 'frontend:dailylogs' %}">Daily Logs</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li {% if slug == 'login' %}class="active"{% endif %}><a href="{% url 'admin:index' %}"> Admin </a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    {% endblock %}
 
-<html>
+    {% block content %}{% endblock content %}
 
-<head>
-<link rel="stylesheet" href='{% get_static_prefix %}css/base.css' />
-<style>
-    {% block style}
-    {% end block style}
-</style>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".rMarkdown-QuickView").each(function(){
+          var content = $(this).text().concat(" #air-temperature-termocouple")
+          $(this).load(content);
+        })
+      })
 
-<title> {% block head_title %} MicroMit Journal {% endblock head_title %}</title>
-</head>
-
-<body>
-<div class = 'container'>
-  {% block content %}
-  {% endblock content %}
-</div>
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-  var count = 0;
-  $(".rMarkdown-QuickView").each(function(){
-    var content = $(this).text().concat(" #air-temperature-termocouple")
-    $(this).load(content);
-  })
-})
-
-$(document).ready(function(){
-  $(".rMarkdown").each(function(){
-    var content = $(this).text()
-     $(this).load(content);
-  })
-})
-  </script>
-</body>
-
-<html>
+      $(document).ready(function(){
+        $(".rMarkdown").each(function()
+        {var content = $(this).text()
+          $(this).load(content);
+        })
+      })
+    </script>
+  </body>
+</html>

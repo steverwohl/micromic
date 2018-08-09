@@ -1,10 +1,11 @@
 from django.urls import include, path, re_path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import dailylog_detail, dailylogs, maintenancelogs, maintenancelog_detail
+from .views import dailylog_detail, dailylogs, homepage, maintenancelogs, maintenancelog_detail
 
 app_name = 'frontend'
 
 urlpatterns = {
+    path('', homepage, name = 'homepage'),
     path('dailylogs/', dailylogs, name = 'dailylogs'),
     path('dailylogs/<int:dailylog_id>/', dailylog_detail, name='dailylog_detail'),
     path('maintenancelogs/', maintenancelogs, name = 'maintenancelogs'),
