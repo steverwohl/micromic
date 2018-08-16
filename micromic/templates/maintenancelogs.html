@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
-{% block content %}
+ {% block content %}
 
-<h1> {{ title }} </h1>
-{% load static %}
-{% for obj in object_list %}
-
-<li><a href="{% url 'frontend:maintenancelog_detail' obj.id %}">{{ obj.date_created }}</a></li>
-{{ obj.comment}}<br/>
-{% endfor %}
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <h2>Maintenance Logs</h2>
+    </div>
+  </div>
+  {% for obj in object_list %}
+  <hr>
+  <div class="row">
+    <div class="col-md-6  col-md-offset-1">
+      <h3><a href="{% url 'frontend:maintenancelog_detail' obj.id %}">{{ obj.date_created }}</a></h3>
+    </div>
+    <div class="col-md-8 col-md-offset-1">
+        <ul class="b">{{ obj.comment}}</ul>
+    </div>
+  </div>
+</hr>
+  {% endfor %}
+</div>
 {% endblock content %}

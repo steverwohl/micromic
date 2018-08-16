@@ -11,7 +11,12 @@
   </div>
 </div>
 <div class="container">
-  <div>
+  <div class="col-md-8  col-md-offset-1">
+    <div class = 'rMarkdown'>{% get_media_prefix %}{{ object.upload }}</div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container">
     <class class="row">
       <class class="col-md-6">
         <h2>About</h2>
@@ -22,5 +27,4 @@
     </class>
   </div>
 </div>
-
 {% endblock content %}

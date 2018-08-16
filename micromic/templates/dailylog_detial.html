@@ -5,5 +5,11 @@
 {% block head_title %} {{ title }} | {{ block.super }}  {% endblock head_title %}
 
 {% block content %}
-<div class = 'rMarkdown'>{% get_media_prefix %}{{ instance.upload }}</div>
+<hr>
+<div class="row">
+  <div class="col-md-6  col-md-offset-1">
+    <div class = 'rMarkdown'>{% get_media_prefix %}{{ instance.upload }}</div>
+  </div>
+</div>
+</hr>
 {% endblock content %}

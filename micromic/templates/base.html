@@ -10,12 +10,14 @@
     <title> {% block head_title %} MicroMit Journal {% endblock head_title %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}"/>
     <style>
       {% block style}
       {% end block style}
     </style>
   </head>
   <body>
+
     {% block top-nav-wrapper %}
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -32,6 +34,7 @@
           <ul class="nav navbar-nav">
             <li {% if slug == 'index' %}class="active"{% endif %}><a href="/">Home</a></li>
             <li {% if slug == 'dailylogs' %}class="active"{% endif %}><a href="{% url 'frontend:dailylogs' %}">Daily Logs</a></li>
+            <li {% if slug == 'maintenancelogs' %}class="active"{% endif %}><a href="{% url 'frontend:maintenancelogs' %}">Maintenance Logs</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li {% if slug == 'login' %}class="active"{% endif %}><a href="{% url 'admin:index' %}"> Admin </a></li>
@@ -45,7 +48,11 @@
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/daterangepicker.min.js' %}"></script>
+
     <script type="text/javascript">
+
       $(document).ready(function(){
         $(".rMarkdown-QuickView").each(function(){
           var content = $(this).text().concat(" #air-temperature-termocouple")
@@ -59,6 +66,29 @@
           $(this).load(content);
         })
       })
+
+      $(function() {
+        $('input[name="datefilter"]').daterangepicker({
+          minYear: 2018,
+          autoUpdateInput: false,
+          locale: {
+            cancelLabel: 'Clear',
+            format: 'YYYY-MM-DD'
+          },
+        });
+
+        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+          $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+          document.getElementById("dateSelect").submit();
+        });
+
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+          $(this).val('');
+          document.getElementById("dateSelect").submit();
+        });
+      });
+
+
     </script>
   </body>
 </html>
