@@ -41,7 +41,13 @@ def dailylog_detail(request, dailylog_id):
 
 
 def maintenancelogs(request, slug="maintenancelogs"):
+    query = request.GET.get('datefilter')
     queryset = MaintenanceList.objects.all()
+    if (query):
+        dates = query.split(' - ')
+        queryset = queryset.filter(date_created__lte=dates[1], date_created__gte=dates[0])
+    else:
+        queryset = queryset[::-1]
     context = {
         'slug' : slug,
         'object_list' : queryset,

@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
- {% block content %}
+{% load static %}
+
+{% block content %}
 
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-1">
       <h2>Maintenance Logs</h2>
+      {% include "dateSelect.html" %}
     </div>
   </div>
   {% for obj in object_list %}

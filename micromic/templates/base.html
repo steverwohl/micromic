@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title> {% block head_title %} MicroMit Journal {% endblock head_title %}</title>
+    <title> {% block head_title %} MicroMit Journal{% endblock head_title %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/daterangepicker.css' %}"/>
@@ -32,7 +32,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {% if slug == 'index' %}class="active"{% endif %}><a href="/">Home</a></li>
+            <li {% if slug == 'index' %}class="active"{% endif %}><a href="{% url 'frontend:homepage' %}">Home</a></li>
             <li {% if slug == 'dailylogs' %}class="active"{% endif %}><a href="{% url 'frontend:dailylogs' %}">Daily Logs</a></li>
             <li {% if slug == 'maintenancelogs' %}class="active"{% endif %}><a href="{% url 'frontend:maintenancelogs' %}">Maintenance Logs</a></li>
           </ul>

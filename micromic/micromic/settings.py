@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +21,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!9w00r6)dde-&rpg@87b$e(u%+69!d&_lt-79b%$k&ef5s=6&i'
+#SECRET_KEY = '!9w00r6)dde-&rpg@87b$e(u%+69!d&_lt-79b%$k&ef5s=6&i'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!9w00r6)dde-&rpg@87b$e(u%+69!d&_lt-79b%$k&ef5s=6&i')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['147.100.179.81','mattermost-ispa.bordeaux.inra.fr']
 
 
 # Application definition
@@ -55,7 +59,9 @@ MIDDLEWARE = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
+FORCE_SCRIPT_NAME = '/micromic'
+
+MEDIA_URL = '%s/media/' % FORCE_SCRIPT_NAME
 
 ROOT_URLCONF = 'micromic.urls'
 
@@ -95,8 +101,12 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -137,7 +147,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '%s/static/' % FORCE_SCRIPT_NAME
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
