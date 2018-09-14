@@ -1,4 +1,4 @@
-#!/home/swohl/repo/django/micromet/venv/bin/python
+#!/home/swohl/micromic/venv/bin/python
 
 import sys
 import getopt
